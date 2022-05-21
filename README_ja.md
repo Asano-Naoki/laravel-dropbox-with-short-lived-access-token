@@ -115,7 +115,7 @@ appを作り終えたら、settingsのところでapp keyを確認すること�
 
 2. app secret
 
-app keyの下の"Show"をクリックすると、app secretが見えるようになります。 
+app keyの下のShowをクリックすると、app secretが見えるようになります。 
 
 3. リフレッシュトークン
 
@@ -124,7 +124,8 @@ Settingsタブの隣のPermissionsタブをクリックします。チェック�
 注:
 リフレッシュトークンを発行する前にボックスをチェックすることに注意してください。
 
-ブラウザでhttps://www.dropbox.com/oauth2/authorize?client_id=YOUR_APP_KEY&response_type=code&token_access_type=offlineにアクセスしてください。YOUR_APP_KEYの部分は、実際のapp keyにしてください。
+ブラウザでhttps://www.dropbox.com/oauth2/authorize?client_id=YOUR_APP_KEY&response_type=code&token_access_type=offline
+にアクセスしてください。YOUR_APP_KEYの部分は、実際のapp keyにしてください。
 
 <img src="./dropbox1_ja.png">
 

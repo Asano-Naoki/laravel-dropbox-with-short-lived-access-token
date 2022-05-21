@@ -130,7 +130,7 @@ Visit "https://www.dropbox.com/oauth2/authorize?client_id=YOUR_APP_KEY&response_
 
 <img src="./dropbox1.png">
 
-Click "Next" at the browser.
+Click "Continue" at the browser.
 
 <img src="./dropbox2.png">
 
