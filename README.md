@@ -65,7 +65,7 @@ class DropboxServiceProvider extends ServiceProvider
             return $short_lived_access_token;
         }
 
-        //dropbox extention
+        //dropbox extension
         Storage::extend('dropbox', function ($app, $config) {
             $adapter = new DropboxAdapter(new DropboxClient(
                  get_short_lived_access_token($config)
