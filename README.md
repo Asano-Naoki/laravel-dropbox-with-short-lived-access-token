@@ -48,27 +48,27 @@ use Spatie\FlysystemDropbox\DropboxAdapter;
 
 class DropboxServiceProvider extends ServiceProvider
 {
+
+    //a function which gets a short-lived access token from your app key, app secret and refresh token
+    private function get_short_lived_access_token($config) {
+        $ch = curl_init('https://api.dropbox.com/oauth2/token');
+        $options = array(CURLOPT_POSTFIELDS => 'grant_type=refresh_token&refresh_token='.$config['refresh_token'],
+                         CURLOPT_USERNAME => $config['app_key'],
+                         CURLOPT_PASSWORD => $config['app_secret'],
+                         CURLOPT_RETURNTRANSFER => true
+                        );
+        curl_setopt_array($ch, $options);
+        $response = json_decode(curl_exec($ch));
+        curl_close($ch);
+        $short_lived_access_token = $response->access_token;
+        return $short_lived_access_token;
+    }
+
     public function boot()
     {
-        //a function which gets a short-lived access token from your app key, app secret and refresh token
-        function get_short_lived_access_token($config) {
-            $ch = curl_init('https://api.dropbox.com/oauth2/token');
-            $options = array(CURLOPT_POSTFIELDS => 'grant_type=refresh_token&refresh_token='.$config['refresh_token'],
-                             CURLOPT_USERNAME => $config['app_key'],
-                             CURLOPT_PASSWORD => $config['app_secret'],
-                             CURLOPT_RETURNTRANSFER => true
-                            );
-            curl_setopt_array($ch, $options);
-            $response = json_decode(curl_exec($ch));
-            curl_close($ch);
-            $short_lived_access_token = $response->access_token;
-            return $short_lived_access_token;
-        }
-
-        //dropbox extension
         Storage::extend('dropbox', function ($app, $config) {
             $adapter = new DropboxAdapter(new DropboxClient(
-                 get_short_lived_access_token($config)
+                 $this->get_short_lived_access_token($config)
             ));
  
             return new FilesystemAdapter(
